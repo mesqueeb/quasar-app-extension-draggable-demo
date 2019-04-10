@@ -1,0 +1,31 @@
+{
+  "name": "quasar-app-extension-draggable-demo",
+  "version": "0.0.1",
+  "description": "A Quasar extension that makes elements draggable and movable with keyboard.",
+  "productName": "Quasar extension - Draggable DEMO",
+  "cordovaId": "org.cordova.quasar.app",
+  "author": "Luca Ban - Mesqueeb",
+  "private": true,
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.1.1",
+    "quasar": "^1.0.0-beta.15"
+  },
+  "devDependencies": {
+    "@quasar/app": "^1.0.0-beta.15",
+    "strip-ansi": "=3.0.1"
+  },
+  "engines": {
+    "node": ">= 8.9.0",
+    "npm": ">= 5.6.0",
+    "yarn": ">= 1.6.0"
+  },
+  "browserslist": [
+    "last 1 version, not dead, ie >= 11"
+  ],
+  "resolutions": {
+    "ajv": "6.8.1"
+  }
+}
