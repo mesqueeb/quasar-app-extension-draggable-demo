@@ -46,8 +46,13 @@ module.exports = function (ctx) {
       // Quasar plugins
       plugins: [
         'Notify'
-      ]
-
+      ],
+      config: {
+        notify: {
+          timeout: 1000,
+          position: 'top'
+        }
+      }
       // iconSet: 'ionicons-v4'
       // lang: 'de' // Quasar language
     },

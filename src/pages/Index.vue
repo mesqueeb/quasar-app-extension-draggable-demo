@@ -13,7 +13,8 @@
           v-for="rowId in rowsOrder"
           :id="rowId"
           v-model="rows[rowId].depth"
-          @click="notify(rowId)"
+          @click.native="notify('tapped', rowId)"
+          @held="notify('held', rowId)"
           :hold-to-select="false"
           :key="`row-${rowId}`"
           class="_row"
@@ -41,9 +42,9 @@
 ._row
   padding 0
   border none
-  border-bottom solid thin lightgray
   background white
 ._row-component
+  border-bottom solid thin lightgray
   color black
   padding 0.5rem
 
@@ -52,8 +53,7 @@
   z-index 10
   background alpha(white, .9)
   padding 10px
-  min-width 100vw
-  min-height 100vh
+  min-width 100%
 
 ._bg-logo
   position fixed
@@ -139,9 +139,9 @@ export default {
     },
   },
   methods: {
-    notify (rowId) {
-      console.log('rowId → ', rowId)
-      this.$q.notify(`tapped "${rowId}"`)
+    notify (event, rowId) {
+      console.log(`${event} "${rowId}"`)
+      this.$q.notify({message: `${event} "${rowId}"`})
     },
   },
 }
