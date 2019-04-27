@@ -24,19 +24,24 @@ module.exports = function (ctx) {
       // all: true, // --- includes everything; for dev only!
 
       components: [
-        'QLayout',
-        'QHeader',
+        'QAvatar',
+        'QBtn',
+        'QCard',
+        'QCardSection',
         'QDrawer',
-        'QPageContainer',
+        'QExpansionItem',
+        'QHeader',
+        'QIcon',
+        'QItem',
+        'QItemLabel',
+        'QItemSection',
+        'QLayout',
+        'QList',
         'QPage',
+        'QPageContainer',
+        'QRadio',
         'QToolbar',
         'QToolbarTitle',
-        'QBtn',
-        'QIcon',
-        'QList',
-        'QItem',
-        'QItemSection',
-        'QItemLabel'
       ],
 
       directives: [

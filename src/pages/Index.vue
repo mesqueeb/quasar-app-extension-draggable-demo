@@ -1,52 +1,30 @@
 <template>
   <q-page class="flex flex-center">
     <div class="_demo flex column flex-start">
-      <h6 class="q-my-sm">Rows</h6>
-      <div class="_settings">
-        Use simple content
-      </div>
-      <q-draggable-rows
-        v-model="rowsOrder"
-        :depthMap="rowsDepthMap"
+      <Controls />
+      <q-expansion-item
+        expand-separator
       >
-        <q-draggable-row
-          v-for="rowId in rowsOrder"
-          :id="rowId"
-          v-model="rows[rowId].depth"
-          @click.native="notify('tapped', rowId)"
-          @held="notify('held', rowId)"
-          :hold-to-select="false"
-          :key="`row-${rowId}`"
-          class="_row"
-        >
-          <div
-            v-model="rows[rowId].body"
-            slot-scope="{selected}" :selected="selected"
-            v-touch-pan.vertical.mouse="_ => {}"
-            class="_row-component"
-          >
-            {{ rows[rowId].body }}
+        <template v-slot:header>
+          <h6 class="q-my-sm q-mr-auto">Settings</h6>
+        </template>
+        <div class="q-pa-sm">
+          <div class="sub-title">Row content</div>
+          <div class="q-gutter-sm">
+            <q-radio v-model="settings.content" val="simple" label="Simple content" />
+            <q-radio v-model="settings.content" val="qitem" label="QItem" />
           </div>
-          <!-- <template v-slot:selection-indicator>
-            <div class="_selection-indicator"></div>
-          </template> -->
-        </q-draggable-row>
-      </q-draggable-rows>
+        </div>
+      </q-expansion-item>
+      <Rows :settings="settings" />
     </div>
-    <img class="_bg-logo" alt="Quasar logo" src="~assets/quasar-logo-full.svg">
+    <div class="_bg">
+      <img class="_bg-logo" alt="Quasar logo" src="~assets/quasar-logo-full.svg">
+    </div>
   </q-page>
 </template>
 
 <style lang="stylus">
-
-._row
-  padding 0
-  border none
-  background white
-._row-component
-  border-bottom solid thin lightgray
-  color black
-  padding 0.5rem
 
 ._demo
   position relative
@@ -55,94 +33,37 @@
   padding 10px
   min-width 100%
 
-._bg-logo
+._bg
   position fixed
+  top 0
+  bottom 0
+  display flex
+  align-items center
+// ._bg-logo
+
+.sub-title
+  padding 0 .5em
+  font-weight 400
 
 </style>
 
 <script>
+import Rows from './Rows'
+import Controls from './Controls'
+
 export default {
   name: 'PageIndex',
+  components: { Rows, Controls },
   data () {
     return {
-      rowsOrder: [
-        'clodpole',
-        'increasedly',
-        'dibai',
-        'pashim',
-        'swelteringly',
-        'introject',
-        'elaborating',
-        'middle',
-        'muff',
-        'prewelcome',
-        'unvivid',
-        'suttner',
-        'stilton',
-        'beret',
-        'faller',
-        'overacceleration',
-        'music',
-        'cambyses',
-        'emasculation',
-        'obtain',
-        'crunchable',
-        'tackiness',
-        'hac',
-        'alternativity',
-        'campong',
-        'oracles',
-        'clamorousness',
-        'presubmit',
-        'nova',
-      ],
-      rows: {
-        clodpole: {id: 'clodpole', depth: 0, body: 'Clodpole'},
-        increasedly: {id: 'increasedly', depth: 0, body: 'Increasedly'},
-        dibai: {id: 'dibai', depth: 0, body: 'Dibai'},
-        pashim: {id: 'pashim', depth: 0, body: 'Pashim'},
-        swelteringly: {id: 'swelteringly', depth: 0, body: 'Swelteringly'},
-        introject: {id: 'introject', depth: 0, body: 'Introject'},
-        elaborating: {id: 'elaborating', depth: 0, body: 'Elaborating'},
-        middle: {id: 'middle', depth: 0, body: 'Middle'},
-        muff: {id: 'muff', depth: 0, body: 'Muff'},
-        prewelcome: {id: 'prewelcome', depth: 0, body: 'Prewelcome'},
-        unvivid: {id: 'unvivid', depth: 0, body: 'Unvivid'},
-        suttner: {id: 'suttner', depth: 0, body: 'Suttner'},
-        stilton: {id: 'stilton', depth: 0, body: 'Stilton'},
-        beret: {id: 'beret', depth: 0, body: 'Beret'},
-        faller: {id: 'faller', depth: 0, body: 'Faller'},
-        overacceleration: {id: 'overacceleration', depth: 0, body: 'Overacceleration'},
-        music: {id: 'music', depth: 0, body: 'Music'},
-        cambyses: {id: 'cambyses', depth: 0, body: 'Cambyses'},
-        emasculation: {id: 'emasculation', depth: 0, body: 'Emasculation'},
-        obtain: {id: 'obtain', depth: 0, body: 'Obtain'},
-        crunchable: {id: 'crunchable', depth: 0, body: 'Crunchable'},
-        tackiness: {id: 'tackiness', depth: 0, body: 'Tackiness'},
-        hac: {id: 'hac', depth: 0, body: 'Hac'},
-        alternativity: {id: 'alternativity', depth: 0, body: 'Alternativity'},
-        campong: {id: 'campong', depth: 0, body: 'Campong'},
-        oracles: {id: 'oracles', depth: 0, body: 'Oracles'},
-        clamorousness: {id: 'clamorousness', depth: 0, body: 'Clamorousness'},
-        presubmit: {id: 'presubmit', depth: 0, body: 'Presubmit'},
-        nova: {id: 'nova', depth: 0, body: 'Nova'},
+      settings: {
+        content: 'simple',
       },
     }
   },
   computed: {
-    rowsDepthMap () {
-      return Object.values(this.rows)
-        .reduce((carry, row) => {
-          carry[row.id] = row.depth
-          return carry
-        }, {})
-    },
   },
   methods: {
-    notify (event, rowId) {
-      console.log(`${event} "${rowId}"`)
-      this.$q.notify({message: `${event} "${rowId}"`})
-    },
   },
 }
 </script>
