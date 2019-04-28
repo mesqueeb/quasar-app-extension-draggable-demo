@@ -2,20 +2,7 @@
   <q-page class="flex flex-center">
     <div class="_demo flex column flex-start">
       <Controls />
-      <q-expansion-item
-        expand-separator
-      >
-        <template v-slot:header>
-          <h6 class="q-my-sm q-mr-auto">Settings</h6>
-        </template>
-        <div class="q-pa-sm">
-          <div class="sub-title">Row content</div>
-          <div class="q-gutter-sm">
-            <q-radio v-model="settings.content" val="simple" label="Simple content" />
-            <q-radio v-model="settings.content" val="qitem" label="QItem" />
-          </div>
-        </div>
-      </q-expansion-item>
+      <Settings :settings="settings" />
       <Rows :settings="settings" />
     </div>
     <div class="_bg">
@@ -49,11 +36,12 @@
 
 <script>
 import Rows from './Rows'
+import Settings from './Settings'
 import Controls from './Controls'
 
 export default {
   name: 'PageIndex',
-  components: { Rows, Controls },
+  components: { Rows, Settings, Controls },
   data () {
     return {
       settings: {

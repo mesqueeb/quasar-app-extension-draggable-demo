@@ -9,16 +9,18 @@
         v-for="rowId in rowsOrder"
         :id="rowId"
         v-model="rows[rowId].depth"
-        @click.native="notify('tapped', rowId)"
         @held="notify('held', rowId)"
         :hold-to-select="false"
         :key="`row-${rowId}`"
         class="_row"
       >
+        <!-- @click.native="notify('tapped', rowId)" -->
         <Row
           :body="rows[rowId].body"
           :id="rowId"
           :settings="settings"
+          slot-scope="{selected}"
+          :selected="selected"
         />
         <!-- <template v-slot:selection-indicator>
           <div class="_selection-indicator"></div>
