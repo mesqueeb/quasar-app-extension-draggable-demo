@@ -1,5 +1,16 @@
 <template>
   <q-page class="flex flex-center">
+    <div v-if="Safari" class="q-pa-lg">
+      <h6 class="text-negative q-my-sm">
+        Dragging doesn't work properly in Desktop Safari
+      </h6>
+      <div>
+        It works in <strong>Mobile Safari</strong> & Google Chrome (obviously 😃).
+      </div>
+      <div>
+        If anyone can help me find out why, please open an <a href="https://github.com/mesqueeb/quasar-app-extension-draggable/issues">issue</a> to discuss.
+      </div>
+    </div>
     <div class="_demo flex column flex-start">
       <q-card>
         <q-tabs
@@ -73,6 +84,7 @@ export default {
   components: { Rows, Settings, Controls, Source },
   data () {
     return {
+      Safari: this.$q.platform.is.safari && this.$q.platform.is.desktop,
       tab: 'controls',
       settings: {
         rowsRef: null,
