@@ -9,10 +9,10 @@
         v-for="rowId in rowsOrder"
         :id="rowId"
         v-model="rows[rowId].depth"
-        @held="notify('held', rowId)"
         :hold-to-select="settings.selectionBehaviour === 'hold'"
         :key="rowId"
       >
+        <!-- @held="notify('held', rowId)" -->
         <!-- @click.native="notify('tapped', rowId)" -->
         <Row
           :body="rows[rowId].body"
