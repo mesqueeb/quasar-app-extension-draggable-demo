@@ -47,6 +47,7 @@ export default {
   computed: {
     controls () {
       const mac = this.$q.platform.is.mac
+      const option = mac ? 'option' : 'alt'
       const holdToSelect = this.settings.selectionBehaviour === 'hold'
       const controls = [
         {
@@ -57,12 +58,12 @@ export default {
         {
           action: `move row up / down\n<sub>(requires selection)</sub>`,
           touch: `drag`,
-          keyboard: `${ mac ? 'option' : 'alt' } up | down`,
+          keyboard: `${option} up | down`,
         },
         {
           action: `indent / unindent\n<sub>(requires selection)</sub>`,
           touch: `swipe right | left`,
-          keyboard: `tab | shift tab\nalt right | left`,
+          keyboard: `${option} right | left\ntab | shift tab`,
         },
         {
           action: `select next/previous\n<sub>(requires selection)</sub>`,
