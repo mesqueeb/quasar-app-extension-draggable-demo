@@ -55,19 +55,19 @@ export default {
           keyboard: holdToSelect ? 'hold 0.2 sec' : 'click',
         },
         {
-          action: `move row up/down\n<sub>(requires selection)</sub>`,
+          action: `move row up / down\n<sub>(requires selection)</sub>`,
           touch: `drag`,
-          keyboard: `${ mac ? 'option' : 'alt' } + up/down`,
+          keyboard: `${ mac ? 'option' : 'alt' } up | down`,
         },
         {
-          action: `indent/unindent\n<sub>(requires selection)</sub>`,
-          touch: `swipe right/left`,
-          keyboard: `tab/shift + tab`,
+          action: `indent / unindent\n<sub>(requires selection)</sub>`,
+          touch: `swipe right | left`,
+          keyboard: `tab | shift tab\nalt right | left`,
         },
         {
           action: `select next/previous\n<sub>(requires selection)</sub>`,
           touch: ``,
-          keyboard: `up/down`,
+          keyboard: `up | down`,
         },
         {
           action: 'unselect',
