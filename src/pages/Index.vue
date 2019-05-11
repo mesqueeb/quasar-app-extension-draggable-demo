@@ -20,7 +20,7 @@
 
         <q-tab-panels v-model="tab" animated>
           <q-tab-panel name="controls" class="q-pa-none">
-            <Controls />
+            <Controls :settings="settings" />
           </q-tab-panel>
           <q-tab-panel name="settings">
             <Settings :settings="settings" />

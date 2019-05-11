@@ -3,19 +3,21 @@
   <thead>
     <tr>
       <th class="text-left">Action</th>
-      <th class="text-left">Hotkeys</th>
+      <th class="text-left">Touch <q-icon name="touch_app" size="24px" /></th>
+      <th class="text-left">Keyboard <q-icon name="keyboard" size="24px" /></th>
     </tr>
   </thead>
   <tbody>
     <tr v-for="row in controlsShown" :key="row.action" class="_tr">
-      <td class="text-left">{{ row.action }}</td>
-      <td class="text-left">{{ row.key }}</td>
+      <td class="text-left" v-html="row.action"></td>
+      <td class="text-left">{{ row.touch }}</td>
+      <td class="text-left">{{ row.keyboard }}</td>
     </tr>
     <tr>
       <td
         @click="showMore = !showMore"
         class="text-left text-primary cursor-pointer"
-        colspan="2"
+        colspan="3"
       >Show {{ showMore ? 'less' : 'more' }}</td>
     </tr>
   </tbody>
@@ -26,46 +28,58 @@
 
 ._tr > td
   white-space pre-line
+  sub
+    color gray
 
 </style>
 
 <script>
 export default {
   name: 'Controls',
+  props: {
+    settings: Object,
+  },
   data () {
-    const mac = this.$q.platform.is.mac
     return {
       showMore: false,
-      controls: [
-        {
-          action: 'select a row',
-          key: 'click\nclick and hold (depending on settings)',
-        },
-        {
-          action: 'select next/previous',
-          key: `up/down`,
-        },
-        {
-          action: 'move row up/down',
-          key: `drag\n${ mac ? 'option' : 'alt' } + up/down`,
-        },
-        {
-          action: 'indent\nunindent',
-          key: `tab\nshift + tab`,
-        },
-        {
-          action: 'unselect',
-          key: `esc\nclick on selected item`,
-        },
-      ]
     }
   },
   computed: {
+    controls () {
+      const mac = this.$q.platform.is.mac
+      const holdToSelect = this.settings.selectionBehaviour === 'hold'
+      const controls = [
+        {
+          action: 'select a row',
+          touch: holdToSelect ? 'hold 0.2 sec' : 'tap',
+          keyboard: holdToSelect ? 'hold 0.2 sec' : 'click',
+        },
+        {
+          action: `move row up/down\n<sub>(requires selection)</sub>`,
+          touch: `drag`,
+          keyboard: `${ mac ? 'option' : 'alt' } + up/down`,
+        },
+        {
+          action: `indent/unindent\n<sub>(requires selection)</sub>`,
+          touch: `swipe right/left`,
+          keyboard: `tab/shift + tab`,
+        },
+        {
+          action: `select next/previous\n<sub>(requires selection)</sub>`,
+          touch: ``,
+          keyboard: `up/down`,
+        },
+        {
+          action: 'unselect',
+          touch: `tap on selected item\nor outside the rows`,
+          keyboard: `esc`,
+        },
+      ]
+      return controls
+    },
     controlsShown () {
       return this.showMore ? this.controls : this.controls.slice(0, 3)
     },
-  },
-  methods: {
   },
 }
 </script>
