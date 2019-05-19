@@ -4,7 +4,8 @@
       <div
         class="_row-component"
       >
-        {{ body }}
+        <div>{{ body }}</div>
+        <q-draggable-row-collapse-arrow />
       </div>
     </template>
     <template v-if="settings.content === 'qitem'">
@@ -19,6 +20,9 @@
           <q-avatar color="primary" text-color="white">
             {{ id.slice(0, 1) }}
           </q-avatar>
+        </q-item-section>
+        <q-item-section side>
+          <q-draggable-row-collapse-arrow />
         </q-item-section>
       </q-item>
     </template>
@@ -43,8 +47,11 @@
 ._row-component
   border-bottom solid thin lightgray
   color black
-  padding 0.5rem
   position relative
+  display flex
+  > *:first-child
+    padding 0.5rem
+    flex 1
   &.--debug
     min-height 100px
     border-top 10px solid lightgray

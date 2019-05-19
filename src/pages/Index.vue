@@ -14,7 +14,7 @@
     <div class="_demo flex column flex-start">
       <q-card>
         <q-tabs
-          v-model="tab"
+          v-model="tabControl"
           dense
           class="text-grey"
           active-color="primary"
@@ -29,7 +29,7 @@
 
         <q-separator />
 
-        <q-tab-panels v-model="tab" animated>
+        <q-tab-panels v-model="tabControl" animated>
           <q-tab-panel name="controls" class="q-pa-none">
             <Controls :settings="settings" />
           </q-tab-panel>
@@ -42,7 +42,32 @@
         </q-tab-panels>
       </q-card>
       <div class="q-pt-lg"></div>
-      <Rows :settings="settings" />
+      <q-card>
+        <q-tabs
+          v-model="tabDemo"
+          dense
+          class="text-grey"
+          active-color="primary"
+          indicator-color="primary"
+          align="justify"
+          narrow-indicator
+        >
+          <q-tab name="simple" label="Basic Demo" />
+          <q-tab name="9000" label="300 rows (slow)" />
+        </q-tabs>
+
+        <q-separator />
+
+        <q-tab-panels v-model="tabDemo" animated>
+          <q-tab-panel name="simple" class="q-pa-sm">
+            <Rows :settings="settings" />
+          </q-tab-panel>
+          <q-tab-panel name="9000" class="q-pa-sm">
+            <Rows9000 :settings="settings" />
+          </q-tab-panel>
+        </q-tab-panels>
+      </q-card>
+
     </div>
     <!-- <div class="_bg">
       <img class="_bg-logo" alt="Quasar logo" src="~assets/quasar-logo-full.svg">
@@ -75,17 +100,19 @@
 
 <script>
 import Rows from './Rows'
+import Rows9000 from './Rows9000'
 import Settings from './Settings'
 import Controls from './Controls'
 import Source from './Source'
 
 export default {
   name: 'PageIndex',
-  components: { Rows, Settings, Controls, Source },
+  components: { Rows, Rows9000, Settings, Controls, Source },
   data () {
     return {
       Safari: this.$q.platform.is.safari && this.$q.platform.is.desktop,
-      tab: 'controls',
+      tabControl: 'controls',
+      tabDemo: 'simple',
       settings: {
         rowsRef: null,
         content: 'simple',

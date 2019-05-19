@@ -22,6 +22,10 @@
           input-class="code-font"
         />
       </div>
+      <div class="q-mt-md">
+        <h6 class="q-mt-none q-mb-sm">Hints</h6>
+        It is not required to pass the <code class="_code">collapsed</code> prop. The prop is <code class="_code">false</code> by default.
+      </div>
     </div>
   </div>
 </template>
@@ -30,6 +34,10 @@
 
 ._code-section
   min-width 400px
+._code
+  background rgba(0,0,0,.05)
+  padding 0 .4em
+  border-radius .2em
 
 </style>
 
@@ -45,32 +53,48 @@ export default {
   computed: {
     sourceCodeTemplate () {
       const s = this.settings
-      const rowContent = (s.content === 'simple') ? `
-    <div slot-scope="{selected}">
+
+      const rowContent = (s.content === 'simple')
+        ? `
+    <div>
       {{ rows[id].body }}
-    </div>` : `
+      <q-draggable-row-collapse-arrow />
+    </div>`
+        : `
     <q-item clickable v-ripple>
       <q-item-section>
         {{ rows[id].body }}
       </q-item-section>
+      <q-item-section side>
+        <q-draggable-row-collapse-arrow />
+      </q-item-section>
     </q-item>`
 
-      const holdToSelect = (s.selectionBehaviour !== 'hold') ? '' : `
+      const holdToSelect = (s.selectionBehaviour !== 'hold')
+        ? ''
+        : `
     :hold-to-select="true"`
-      const selectionIndicator = (s.selectionIndicator === 'default') ? '' : `
+
+      const selectionIndicator = (s.selectionIndicator === 'default')
+        ? ''
+        : `
     <template v-slot:selection-indicator>
       <q-card />
     </template>`
+
       const all = `<q-draggable-rows
   v-model="order"
 >
   <q-draggable-row
-    v-for="id in order" :key="id"
+    v-for="id in order"
+    :key="id"
     :id="id"
     v-model="rows[id].depth"${holdToSelect}
+    :collapsed.sync="rows[id].collapsed"
   >${rowContent}${selectionIndicator}
   </q-draggable-row>
 </q-draggable-rows>`
+
       return all
     },
     sourceCodeScript () {
@@ -81,7 +105,7 @@ export default {
 ]
 const rows = {
   id1: {depth: 0, body: 'I am row one!'},
-  id2: {depth: 0, body: 'Another row bro!'},
+  id2: {depth: 0, body: 'Another row bro!', collapsed: true},
   // ...
 }
 export default {
