@@ -42,12 +42,48 @@
 
 <script>
 import Row from './Row'
+
+function createBatcher (
+  handler,
+  max = 100,
+){
+  let hasJobs = false
+  const queue = []
+
+  return {
+    changeHandler (fn) {
+      handler = fn
+    },
+    queue(items) {
+      queue.push(...items)
+      if(!hasJobs) {
+        hasJobs = true
+        doBatch()
+      }
+    },
+    cancel (purgeQueue = true) {
+      hasJobs = false
+      if(purgeQueue) queue.splice(0)
+    }
+  }
+
+  function doBatch () {
+    if (!hasJobs) return
+    const batch = queue.splice(0,max)
+    handler(batch)
+
+    if(!queue.length) hasJobs = false
+    if(hasJobs) requestAnimationFrame(doBatch)
+  }
+}
+
 export default {
   name: 'Rows',
   components: { Row },
   props: {
     settings: Object,
   },
+  created () { this.load() },
   mounted () { this.settings.rowsRef = this.$refs.rowsRef },
   data () {
     const rowOrderSection = [
@@ -81,12 +117,12 @@ export default {
       'clamorousness',
       'presubmit',
     ]
-    let rowOrder = [
+    let rowIdsToAdd = [
       'all',
     ]
     let i = 10
     while (i > 0) {
-      rowOrder = rowOrder.concat(rowOrderSection.map(id => id + i))
+      rowIdsToAdd = rowIdsToAdd.concat(rowOrderSection.map(id => id + i))
       i--
     }
     const rows = {
@@ -121,12 +157,13 @@ export default {
       clamorousness: {id: 'clamorousness', depth: 1, body: 'Clamorousness'},
       presubmit: {id: 'presubmit', depth: 1, body: 'Presubmit'},
     }
-    rowOrder.forEach(id => {
+    rowIdsToAdd.forEach(id => {
       if (rows[id]) return
       rows[id] = {id, depth: 1, body: id.toUpperCase()}
     })
     return {
-      rowOrder,
+      rowIdsToAdd,
+      rowOrder: [],
       rows
     }
   },
@@ -137,6 +174,11 @@ export default {
       console.log(`${event} "${rowId}"`)
       this.$q.notify({message: `${event} "${rowId}"`})
     },
+    load () {
+      const ro = this.rowOrder
+      const rafBatch = createBatcher(ids => ro.push(...ids), 500)
+      rafBatch.queue(this.rowIdsToAdd)
+    }
   },
 }
 </script>

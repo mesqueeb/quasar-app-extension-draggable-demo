@@ -37,6 +37,7 @@
 
 <script>
 import Row from './Row'
+
 export default {
   name: 'Rows',
   components: { Row },

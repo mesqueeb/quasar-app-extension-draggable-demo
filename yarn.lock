@@ -5566,10 +5566,10 @@ qs@6.7.0:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
   integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
 
-quasar-app-extension-draggable@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/quasar-app-extension-draggable/-/quasar-app-extension-draggable-0.2.0.tgz#1f58b6559d9c679453bf7ae3043cc91c2f0fa62c"
-  integrity sha512-XjIJX2CyCZtDO+LDJwFn+QSigYDcTo3lOsgUOVtWdzrW9+FTP1/kcoSMjoEKg5wxHJ/VUkMK4T45Wv1d5PH2rA==
+quasar-app-extension-draggable@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/quasar-app-extension-draggable/-/quasar-app-extension-draggable-0.2.1.tgz#d05f18b0354c37b8b069628d73927a2063360d23"
+  integrity sha512-MuVpmqhiIr7ptnhggcSBOC7oOiRCp5FL34MvJEBwgkId4z7NcAsdWK4S9jAlBN6p6bxZLoiVDQMUce3J+3tulw==
 
 quasar@^1.0.0-beta.24:
   version "1.0.0-beta.24"
