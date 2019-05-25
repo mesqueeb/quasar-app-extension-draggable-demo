@@ -2,9 +2,9 @@
   "version": "v1",
   "packages": {
     "quasar-app-extension-draggable": {
-      "signature": "a31353a87e9c0dbcb00fcf2dbd8681e2",
+      "signature": "09a11e6d67cc7c33cd7d7ac8d67c25fa",
       "file": true,
-      "replaced": "^0.2.0"
+      "replaced": "^0.2.1"
     }
   }
 }
