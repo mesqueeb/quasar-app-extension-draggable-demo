@@ -13,11 +13,11 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.1.2",
-    "quasar": "^1.0.0-rc.2",
+    "quasar": "^1.0.0-rc.4",
     "quasar-app-extension-draggable": "^0.2.2"
   },
   "devDependencies": {
-    "@quasar/app": "^1.0.0-rc.4",
+    "@quasar/app": "^1.0.0-rc.6",
     "strip-ansi": "=3.0.1"
   },
   "engines": {

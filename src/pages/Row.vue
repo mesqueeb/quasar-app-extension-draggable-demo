@@ -42,7 +42,6 @@
 </template>
 
 <style lang="stylus">
-@import '~quasar-variables'
 
 ._row-component
   border-bottom solid thin lightgray
