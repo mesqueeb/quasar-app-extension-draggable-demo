@@ -31,8 +31,6 @@
 </template>
 
 <style lang="stylus">
-@import '~quasar-variables'
-
 </style>
 
 <script>
