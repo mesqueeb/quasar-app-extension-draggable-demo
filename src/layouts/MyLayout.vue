@@ -28,7 +28,7 @@
       <q-list>
         <q-item-label header>Essential Links</q-item-label>
 
-                <q-item clickable tag="a" target="_blank" href="http://v1.quasar-framework.org">
+        <q-item clickable tag="a" target="_blank" href="http://v1.quasar-framework.org">
           <q-item-section avatar>
             <q-icon name="ion-aperture" />
           </q-item-section>
